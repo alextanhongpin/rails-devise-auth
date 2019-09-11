@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
 
-  devise_controllers = {
-    # confirmations: 'overrides/confirmations'
-    passwords: 'devise_token_auth/passwords',
-    sessions: 'devise_token_auth/sessions'
-  }
-
   # By setting the :api as module, we ignore the prefix /api in our routes.
   scope module: :api do
     namespace :v1 do
@@ -14,8 +8,13 @@ Rails.application.routes.draw do
 
       # API calls for authentication.
       # /v1/auth
-      mount_devise_token_auth_for 'User', at: :auth, controllers: devise_controllers
+      mount_devise_token_auth_for 'User', at: :auth
     end
+  end
+
+  devise_scope :user do
+    post 'v1/auth/register', to: 'devise_token_auth/registration#create'
+    post 'v1/auth/login', to: 'devise_token_auth/sessions#create'
   end
 
   # Overrides the base path from /users to /auth and additionally the default
