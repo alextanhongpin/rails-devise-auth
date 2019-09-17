@@ -1,13 +1,12 @@
 module Api::V1
-
   class UsersController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     before_action :set_user, only: [:show, :update, :destroy]
 
     include Registerer
 
     def index
-      render json: User.all
+      render json: UserService.get_users
     end
 
     # GET /users/1
