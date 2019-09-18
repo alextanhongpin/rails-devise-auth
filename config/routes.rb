@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
 
+  get 'health', to: 'pages#health'
+
   # By setting the :api as module, we ignore the prefix /api in our routes.
   scope module: :api do
     namespace :v1 do
