@@ -64,3 +64,7 @@ gem "rack-cors", "~> 1.0"
 
 gem "sidekiq", "~> 6.0"
 
+
+gem "rails_semantic_logger", "~> 4.4"
+
+gem "awesome_print", "~> 1.8"

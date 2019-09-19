@@ -102,4 +102,23 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  if ENV["LOG_LEVEL"].present?
+    config.log_level = ENV['LOG_LEVEL'].downcase.strip.to_sym
+  end
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    STDOUT.sync = true
+    config.rails_semantic_logger.add_file_appender = false
+    config.semantic_logger.add_appender(
+      io: STDOUT, 
+      level: config.log_level, 
+      formatter: :json
+    )
+    config.log_tags = {
+      request_id: :request_id,
+      ip: :remote_ip,
+      user: -> request { request.cookie_jar['login'] }
+    }
+    config.rails_semantic_logger.quiet_assets = true
+    config.colorize_logging = false
+  end
 end
