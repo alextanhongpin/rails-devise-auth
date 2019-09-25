@@ -33,8 +33,7 @@ module Testapi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-
-
+    
     # Middlewares.
 
     # Enable flash middleware for devise token auth. Or disable it entirely.

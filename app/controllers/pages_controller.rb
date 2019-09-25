@@ -4,8 +4,10 @@ class PagesController < ApplicationController
   end
 
   def health
-    TestWorker.perform_async("hello world!")
-    render json: {ok: true}
+    render json: {
+      version: Git::VERSION,
+      revision: Git::REVISION
+    }
   end
 
 end
