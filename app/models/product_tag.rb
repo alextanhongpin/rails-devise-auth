@@ -1,3 +1,3 @@
 class ProductTag < ApplicationRecord
-  belong_to :taggable, polymorphic: true
+  belongs_to :taggable, polymorphic: true
 end
