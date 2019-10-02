@@ -10,15 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_071444) do
+ActiveRecord::Schema.define(version: 2019_10_02_143133) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "count"
     t.text "body"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "product_tags", force: :cascade do |t|
+    t.string "taggable_type"
+    t.bigint "taggable_id"
+    t.json "tags"
+    t.json "blacklisted_tags"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["taggable_id", "taggable_type"], name: "index_product_tags_on_taggable_id_and_taggable_type"
+    t.index ["taggable_type", "taggable_id"], name: "index_product_tags_on_taggable_type_and_taggable_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

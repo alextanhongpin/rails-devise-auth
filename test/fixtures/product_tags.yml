@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: 
+  tags: 
+  blacklisted_tags: 
+
+two:
+  product: 
+  tags: 
+  blacklisted_tags: 
