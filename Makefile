@@ -26,3 +26,9 @@ migrate:
 
 rollback:
 	@rails db:rollback
+
+start-docker:
+	@docker run -p 8080:8080 -e SECRET_KEY_BASE=${SECRET_KEY_BASE} rails/api
+
+docker:
+	@docker build -t rails/api .

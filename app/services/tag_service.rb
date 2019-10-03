@@ -3,7 +3,6 @@ require 'lingua/stemmer'
 module TagService
   extend self
 
-
   def parse(text)
     stemmer = Lingua::Stemmer.new
 
