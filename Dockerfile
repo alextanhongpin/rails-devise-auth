@@ -8,13 +8,15 @@ RUN apk --update add --virtual $BUILD_PACKAGES && \
     gem install bundler && cd /app && \
     bundle config build.nokogiri --use-system-libraries && bundle install --without development test
 
-WORKDIR /app
-COPY . .
 
-# RUN chown -R nobody:nogroup /
-# USER nobody
+WORKDIR /app
+
+COPY . .
 
 ENV RAILS_ENV=production
 ENV NODE_ENV=production
+
+RUN chown -R nobody:nogroup /app
+USER nobody
 
 CMD ["rails", "s", "-p", "8080"]
